@@ -4,6 +4,7 @@ import { Actions } from ":actions";
 
 export const INITIAL_STATE: RootState = {
   textToSearch: "",
+  searchPending: false,
   errorText: "",
   foundAlbums: [],
   savedAlbums: [],

@@ -9,6 +9,7 @@ export interface Album {
 
 export interface RootState {
   textToSearch: string;
+  searchPending: boolean;
   errorText: string;
   foundAlbums: Album[];
   savedAlbums: Album[];
