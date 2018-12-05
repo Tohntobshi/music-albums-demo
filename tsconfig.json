@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+      "outDir": "./dist/",
+      "sourceMap": true,
+      "noImplicitAny": true,
+      "module": "commonjs",
+      "target": "es5",
+      "jsx": "react",
+      "lib": [ "es2015", "dom" ],
+      "baseUrl": "./",
+      "paths": {
+        ":components/*": ["src/components/*"],
+        ":scenes/*": ["src/scenes/*"],
+        ":images/*": ["src/assets/images*"],
+        ":utils": ["src/utils"],
+        ":types": ["src/global/types"],
+      }
+  },
+  "include": [
+      "./src/**/*"
+  ]
+}
