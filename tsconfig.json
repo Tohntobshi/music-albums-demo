@@ -11,9 +11,10 @@
       "paths": {
         ":components/*": ["src/components/*"],
         ":scenes/*": ["src/scenes/*"],
-        ":images/*": ["src/assets/images*"],
+        ":images/*": ["src/assets/images/*"],
+        ":actions": ["src/redux/actions"],
         ":utils": ["src/utils"],
-        ":types": ["src/global/types"],
+        ":types": ["src/types"],
       }
   },
   "include": [

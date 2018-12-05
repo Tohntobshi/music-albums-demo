@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack --mode=production",
     "start": "webpack-dev-server"
   },
@@ -11,8 +10,10 @@
   "license": "ISC",
   "devDependencies": {
     "@types/node": "^10.7.1",
+    "@types/ramda": "^0.25.42",
     "@types/react": "^16.4.9",
     "@types/react-dom": "^16.0.7",
+    "@types/react-redux": "^6.0.10",
     "awesome-typescript-loader": "^5.2.0",
     "clean-webpack-plugin": "^0.1.19",
     "css-loader": "^1.0.0",
@@ -29,7 +30,12 @@
     "webpack-dev-server": "^3.1.5"
   },
   "dependencies": {
+    "ramda": "^0.26.1",
     "react": "^16.4.2",
-    "react-dom": "^16.4.2"
+    "react-dom": "^16.4.2",
+    "redux": "^4.0.1",
+    "redux-observable": "^1.0.0",
+    "reduxsauce": "^1.0.0",
+    "rxjs": "^6.3.3"
   }
 }
