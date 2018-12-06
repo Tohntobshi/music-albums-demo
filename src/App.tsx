@@ -1,8 +1,10 @@
 import * as React from "react";
-import { TemplateScene } from ":scenes/TemplateScene";
+import { Provider } from "react-redux";
+import { Navigator } from "./navigation";
+import { store } from "./redux/store";
 
 export const App = () => (
-  <div>
-    <TemplateScene />
-  </div>
+  <Provider store={store}>
+    <Navigator />
+  </Provider>
 );

@@ -1,9 +1,8 @@
 import * as React from "react";
 const styles = require("./styles.scss");
 
-export const TemplateComponent = () => (
+export default () => (
   <div className={styles.container}>
-    <p>hello world</p>
-    <img src={require(":images/cat.jpg")} />
+    saved
   </div>
 );

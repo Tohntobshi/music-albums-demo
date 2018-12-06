@@ -1,6 +1,5 @@
 import { Observable, Observer } from "rxjs";
 import * as R from "ramda";
-import { Album } from ":types";
 
 export function getCover(id: string): Observable<string> {
   return Observable.create((observer: Observer<string>) => {
