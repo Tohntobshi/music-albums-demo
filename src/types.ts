@@ -2,9 +2,10 @@ export interface Album {
   id: string;
   title: string;
   artist: string;
-  date: number;
+  date: Date;
   country: string;
   trackCount: number;
+  cover: string;
 }
 
 export interface RootState {
