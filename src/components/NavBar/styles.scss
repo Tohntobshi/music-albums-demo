@@ -1,4 +1,17 @@
 @import ':sharedStyles';
 
 .container {
+  text-align: center;
+  padding: 22px 0;
+}
+.button {
+  font-size: 18px;
+  font-family: 'Roboto';
+  text-decoration: none;
+  color: black;
+  margin: 0 50px;
+}
+
+.active {
+  font-weight: bold;
 }

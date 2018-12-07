@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@types/classnames": "^2.2.6",
     "@types/node": "^10.7.1",
     "@types/ramda": "^0.25.42",
     "@types/react": "^16.4.9",
@@ -31,6 +32,7 @@
     "webpack-dev-server": "^3.1.5"
   },
   "dependencies": {
+    "classnames": "^2.2.6",
     "ramda": "^0.26.1",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",

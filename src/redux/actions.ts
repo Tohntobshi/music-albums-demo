@@ -1,3 +1,5 @@
+import { Album } from ":types";
+
 export const Actions = {
   CHANGE_TEXT_TO_SEARCH: "CHANGE_TEXT_TO_SEARCH",
   CHANGE_ERROR_TEXT: "CHANGE_ERROR_TEXT",
@@ -5,6 +7,7 @@ export const Actions = {
   REQUEST_ALBUMS: "REQUEST_ALBUMS",
   SAVE_ALBUM: "SAVE_ALBUM",
   REMOVE_ALBUM: "REMOVE_ALBUM",
+  PUT_FOUND_ALBUMS: "PUT_FOUND_ALBUMS",
 };
 
 export const ActionCreators = {
@@ -14,4 +17,5 @@ export const ActionCreators = {
   changeTextToSearch: (text: string) => ({ type: Actions.CHANGE_TEXT_TO_SEARCH, text }),
   changeErrorText: (text: string) => ({ type: Actions.CHANGE_ERROR_TEXT, text }),
   switchPending: (state: boolean) => ({ type: Actions.SWITCH_PENDING, state }),
+  putFoundAlbums: (albums: Album[]) => ({ type: Actions.PUT_FOUND_ALBUMS, albums }),
 };

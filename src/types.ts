@@ -6,6 +6,7 @@ export interface Album {
   country: string;
   trackCount: number;
   cover: string;
+  searchScore?: number;
 }
 
 export interface RootState {

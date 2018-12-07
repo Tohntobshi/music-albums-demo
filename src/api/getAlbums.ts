@@ -20,6 +20,7 @@ export function getAlbums(textToSearch: string): Observable<Album[]> {
                 country: el["country"] || "",
                 cover: "",
                 artist: el["artist-credit"][0]["artist"]["name"] || "",
+                searchScore: el["score"],
               };
             } catch (e) {
               return null;

@@ -1,0 +1,25 @@
+@import ':sharedStyles';
+
+.container {
+  border: 2px solid $explosiveGray;
+  height: 42px;
+  max-width: 373px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 42px;
+}
+
+.input {
+  border: none;
+  font-size: 18px;
+  padding: 0 19px;
+}
+
+.submitButton {
+  background-image: url('../../assets/images/arrow-right.svg');
+  background-color: transparent;
+  border: none;
+  background-repeat: no-repeat;
+  background-size: 50%;
+  background-position: center;
+}

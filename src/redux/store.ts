@@ -12,3 +12,7 @@ export const store = createStore(
 );
 
 epicMiddleware.run(epics);
+
+// store.subscribe(() => {
+//   console.log(store.getState());
+// });
