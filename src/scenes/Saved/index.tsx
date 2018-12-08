@@ -23,7 +23,7 @@ class Saved extends React.PureComponent<Props, Position> {
   };
   public componentDidMount() {
     this.postitionSubscription = this.positionUpdates$.pipe(
-      // throttleTime(30),
+      // throttleTime(50),
     ).subscribe((position) => this.setState(position));
   }
   public componentWillUnmount() {

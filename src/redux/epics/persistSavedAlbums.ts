@@ -13,7 +13,9 @@ import { ActionCreators } from ":actions";
 
 function getSavedAlbums(): Album[] {
   try {
-    return JSON.parse(localStorage.getItem("savedAlbums"));
+    const albums = localStorage.getItem("savedAlbums");
+    if (!albums) { return []; }
+    return JSON.parse(albums);
   } catch (e) {
     return [];
   }

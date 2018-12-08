@@ -43,7 +43,7 @@ export default class extends React.PureComponent<Props> {
         currentScale = 1 - (currentOffsetAbs - 160) / 1280;
         currentScale = Math.min(1, Math.max(0, currentScale));
       }
-      el.style.zIndex = -currentOffsetAbs as any;
+      el.style.zIndex = -Math.ceil(currentOffsetAbs / 320) as any;
       el.style.transformOrigin = currentOffset > 0 ? "bottom left" : "bottom right";
       el.style.transform = `translate3d(${currentX}px, 0, 0) scale(${currentScale})`;
       if (currentOffsetAbs > 560) {
