@@ -37,7 +37,7 @@ export function getAlbums(textToSearch: string): Observable<Album[]> {
     req.addEventListener("load", onLoad);
     req.addEventListener("loadend", onLoadEnd);
     req.addEventListener("error", onError);
-    req.open("get", `http://musicbrainz.org/ws/2/release/?query=release:${textToSearch}&fmt=json`);
+    req.open("get", `https://musicbrainz.org/ws/2/release/?query=release:${textToSearch}&fmt=json`);
     req.send();
     return () => {
       req.abort();

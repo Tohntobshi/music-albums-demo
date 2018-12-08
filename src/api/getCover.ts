@@ -20,7 +20,7 @@ export function getCover(id: string): Observable<string> {
     req.addEventListener("load", onLoad);
     req.addEventListener("loadend", onLoadEnd);
     req.addEventListener("error", onError);
-    req.open("get", `http://coverartarchive.org/release/${id}`);
+    req.open("get", `https://coverartarchive.org/release/${id}`);
     req.send();
     return () => {
       req.abort();
