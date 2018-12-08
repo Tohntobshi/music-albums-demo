@@ -1,10 +1,11 @@
 import * as React from "react";
 import * as R from "ramda";
-import { Subject, Subscription } from "rxjs";
-import { mapTo, switchMap, takeUntil, tap, map, pairwise } from "rxjs/operators";
+import { Subject, Subscription, of } from "rxjs";
+import { mapTo, switchMap, takeUntil, tap, map, pairwise, concat } from "rxjs/operators";
 import classnames from "classnames";
 import Cover from ":components/Cover";
 import { Album } from ":types";
+import { createAutoScrollSequence } from ":utils";
 const styles = require("./styles.scss");
 
 export interface Position {
@@ -33,18 +34,19 @@ export default class extends React.PureComponent<Props> {
       if (!el) { return; }
       const currentPosition = index * 320;
       const currentOffset = currentPosition - this.position;
+      const currentOffsetAbs = Math.abs(currentOffset);
       let currentX = currentOffset;
       currentX = currentX > 320 ? 320 : currentX;
       currentX = currentX < -320 ? -320 : currentX;
       let currentScale = 1;
-      if (Math.abs(currentOffset) > 160) {
-        currentScale = 1 - (Math.abs(currentOffset) - 160) / 1280;
+      if (currentOffsetAbs > 160) {
+        currentScale = 1 - (currentOffsetAbs - 160) / 1280;
         currentScale = Math.min(1, Math.max(0, currentScale));
       }
+      el.style.zIndex = -currentOffsetAbs as any;
       el.style.transformOrigin = currentOffset > 0 ? "bottom left" : "bottom right";
       el.style.transform = `translate3d(${currentX}px, 0, 0) scale(${currentScale})`;
-      el.style.zIndex = `${this.elementRefs.length * 320 - Math.abs(currentOffset)}`;
-      if (Math.abs(currentOffset) > 560) {
+      if (currentOffsetAbs > 560) {
         el.style.display = "none";
       } else {
         el.style.display = "block";
@@ -52,14 +54,14 @@ export default class extends React.PureComponent<Props> {
     });
   }
 
-  private scrollBy = (amount: number) => {
+  private scrollTo = (targetPosition: number = this.position) => {
     const maxPosition = (this.elementRefs.length - 1) * 320;
-    if (this.position + amount < 0) {
+    if (targetPosition < 0) {
       this.position = 0;
-    } else if (this.position + amount > maxPosition) {
+    } else if (targetPosition > maxPosition) {
       this.position = maxPosition;
     } else {
-      this.position += amount;
+      this.position = targetPosition;
     }
     this.applyOffset();
     this.props.onMove({ position: this.position, maxPosition });
@@ -67,18 +69,38 @@ export default class extends React.PureComponent<Props> {
 
   public componentDidMount() {
     this.dragSubscription = this.dragStart$.pipe(
-      switchMap(() => this.dragMove$.pipe(
+      switchMap((startEvt: any) => {
+        const startPosition = this.position;
+        const startCursorPos = startEvt.clientX;
+
+        const autoScrollOptions = {
+          velocity: 0,
+          currentPosition: startPosition,
+          currentTimestamp: Date.now(),
+          snap: 320,
+        };
+
+        return this.dragMove$.pipe(
         takeUntil(this.dragEnd$),
-        map((e: any) => e.clientX),
-        pairwise(),
-        map(([a, b]) => a - b),
-      )),
-    ).subscribe(this.scrollBy);
-    this.scrollBy(0);
+          map((moveEvt: any) => startPosition - (moveEvt.clientX - startCursorPos)),
+          tap((position) => {
+            const time = Date.now();
+            const delta = position - autoScrollOptions.currentPosition;
+            const elapsed = time - autoScrollOptions.currentTimestamp;
+            autoScrollOptions.currentTimestamp = time;
+            autoScrollOptions.currentPosition = position;
+            const v = (1000 * delta) / (elapsed + 1);
+            autoScrollOptions.velocity = (0.8 * v) + (0.2 * autoScrollOptions.velocity);
+          }),
+          concat(createAutoScrollSequence(autoScrollOptions)),
+        );
+      }),
+    ).subscribe(this.scrollTo);
+    this.scrollTo();
   }
 
   public componentDidUpdate() {
-    this.scrollBy(0);
+    this.scrollTo();
   }
 
   public componentWillUnmount() {
@@ -90,7 +112,7 @@ export default class extends React.PureComponent<Props> {
     return (
       <div
         className={styles.container}
-        onMouseDown={(e) => { e.preventDefault(); this.dragStart$.next(); }}
+        onMouseDown={(e) => { e.preventDefault(); this.dragStart$.next(e); }}
         onMouseMove={(e) => { e.preventDefault(); this.dragMove$.next(e); }}
         onMouseUp={(e) => { e.preventDefault(); this.dragEnd$.next(); }}
         onMouseLeave={(e) => { e.preventDefault(); this.dragEnd$.next(); }}
