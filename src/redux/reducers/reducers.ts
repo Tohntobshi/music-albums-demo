@@ -25,6 +25,14 @@ export const putFoundAlbums = (
   foundAlbums: action.albums,
 });
 
+export const putSavedAlbums = (
+  state: RootState,
+  action: ReturnType<typeof ActionCreators.putFoundAlbums>,
+): RootState => ({
+  ...state,
+  savedAlbums: action.albums,
+});
+
 export const switchPending = (
   state: RootState,
   action: ReturnType<typeof ActionCreators.switchPending>,

@@ -8,6 +8,7 @@ export const Actions = {
   SAVE_ALBUM: "SAVE_ALBUM",
   REMOVE_ALBUM: "REMOVE_ALBUM",
   PUT_FOUND_ALBUMS: "PUT_FOUND_ALBUMS",
+  PUT_SAVED_ALBUMS: "PUT_SAVED_ALBUMS",
 };
 
 export const ActionCreators = {
@@ -18,4 +19,5 @@ export const ActionCreators = {
   changeErrorText: (text: string) => ({ type: Actions.CHANGE_ERROR_TEXT, text }),
   switchPending: (state: boolean) => ({ type: Actions.SWITCH_PENDING, state }),
   putFoundAlbums: (albums: Album[]) => ({ type: Actions.PUT_FOUND_ALBUMS, albums }),
+  putSavedAlbums: (albums: Album[]) => ({ type: Actions.PUT_SAVED_ALBUMS, albums }),
 };

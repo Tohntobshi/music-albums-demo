@@ -1,9 +1,10 @@
 import { createReducer } from "reduxsauce";
-import { RootState } from ":types";
+import { RootState, Album } from ":types";
 import { Actions } from ":actions";
 import {
   changeTextToSearch,
   putFoundAlbums,
+  putSavedAlbums,
   switchPending,
   changeErrorText,
   saveAlbum,
@@ -25,6 +26,7 @@ const HANDLERS = {
   [Actions.CHANGE_ERROR_TEXT]: changeErrorText,
   [Actions.SAVE_ALBUM]: saveAlbum,
   [Actions.REMOVE_ALBUM]: removeAlbum,
+  [Actions.PUT_SAVED_ALBUMS]: putSavedAlbums,
 };
 
 export default createReducer(INITIAL_STATE, HANDLERS);
