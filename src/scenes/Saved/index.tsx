@@ -1,6 +1,6 @@
 import * as React from "react";
 import { connect } from "react-redux";
-import { bindActionCreators} from "redux";
+import { bindActionCreators } from "redux";
 import { ActionCreators } from ":actions";
 import { RootState, Album } from ":types";
 import Gallery, { Position } from ":components/Gallery";
@@ -31,23 +31,35 @@ class Saved extends React.PureComponent<Props, Position> {
   }
   public render() {
     const { position, maxPosition } = this.state;
-    const { savedAlbums } = this.props;
+    const { savedAlbums, removeAlbum } = this.props;
     const index = Math.round((Math.max(0, (position - 160)) / maxPosition) * savedAlbums.length) || 0;
     const album = savedAlbums[index];
     return (
       <div className={styles.container}>
-        <Gallery savedAlbums={this.props.savedAlbums} onMove={(pos) => this.positionUpdates$.next(pos)} />
         {
-          album &&
-          <div className={styles.info}>
-            <p>{album.title}</p>
-            <p>{album.artist}</p>
-            <p>{new Date(album.date).getFullYear() || ""}</p>
-            <p>{album.country}</p>
-            <p>Tracks: {album.trackCount}</p>
-          </div>
+          savedAlbums.length > 0 ?
+            <React.Fragment>
+              <Gallery
+                savedAlbums={this.props.savedAlbums}
+                onMove={(pos) => this.positionUpdates$.next(pos)}
+                onRemove={removeAlbum}
+              />
+              <div className={styles.info}>
+                {
+                  album &&
+                  <React.Fragment>
+                    <p>{album.title}</p>
+                    <p>{album.artist}</p>
+                    <p>{new Date(album.date).getFullYear() || ""}</p>
+                    <p>{album.country}</p>
+                    <p>Tracks: {album.trackCount}</p>
+                  </React.Fragment>
+                }
+              </div>
+              <Indicator className={styles.indicator} position={position} maxPosition={maxPosition} />
+            </React.Fragment> :
+            <p className={styles.nothing}>Nothing is saved yet</p>
         }
-        <Indicator className={styles.indicator} position={position} maxPosition={maxPosition} />
       </div>
     );
   }

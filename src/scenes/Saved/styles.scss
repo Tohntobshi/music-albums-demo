@@ -1,7 +1,7 @@
 @import ':sharedStyles';
 
 .container {
-  padding-top: 30px;
+  padding-top: 50px;
 }
 
 .indicator {
@@ -20,4 +20,12 @@
   &:not(:last-child) {
     padding-bottom: 7px;
   }
+}
+
+.nothing {
+  text-align: center;
+  font-size: 14px;
+  font-family: 'Roboto';
+  color: $explosiveGray;
+  margin-top: 100px;
 }

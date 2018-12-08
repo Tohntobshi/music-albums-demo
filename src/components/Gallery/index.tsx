@@ -15,7 +15,7 @@ export interface Position {
 interface Props {
   className?: string;
   savedAlbums: Album[];
-  // onRemove: (id: string) => void;
+  onRemove: (id: string) => void;
   onMove: (position: Position) => void;
 }
 
@@ -103,6 +103,7 @@ export default class extends React.PureComponent<Props> {
               key={el.id}
             >
               <Cover source={el.cover} size={320}/>
+              <button className={styles.delButton} onClick={() => this.props.onRemove(el.id)} />
             </div>
           ))
         }
