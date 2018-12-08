@@ -1,0 +1,24 @@
+@import ':sharedStyles';
+
+.container {
+}
+
+.statusContainer {
+  margin-top: 100px;
+}
+
+.searchPending {
+  display: block;
+  margin: 0 auto;
+}
+
+.alertText {
+  font-family: 'Roboto';
+  font-size: 14px;
+  text-align: center;
+  color: $explosiveGray;
+}
+
+.searchList {
+  margin-top: 43px;
+}

@@ -31,7 +31,7 @@ export const requestAlbums = (
   switchMap((textToSearch: string) => {
     return concat(
       // clear old results and switch pending flag to true
-      of(ActionCreators.switchPending(true), ActionCreators.putFoundAlbums([])),
+      of(ActionCreators.switchPending(true), ActionCreators.putFoundAlbums([]), ActionCreators.changeErrorText("")),
       // request albums
       getAlbums(textToSearch).pipe(
         switchMap((albums: Album[]) => {

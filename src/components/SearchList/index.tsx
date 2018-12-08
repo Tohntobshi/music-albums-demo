@@ -1,13 +1,43 @@
 import * as React from "react";
-import { NavLink } from "react-router-dom";
+import * as R from "ramda";
 import classnames from "classnames";
+import { Album } from ":types";
 const styles = require("./styles.scss");
+const defaultCover = require(":images/default-cover.svg");
 
 interface Props {
-  className?: object;
+  className?: string;
+  savedAlbums: Album[];
+  foundAlbums: Album[];
+  onSave: (id: string) => void;
+  onRemove: (id: string) => void;
 }
 
-export default (props: Props) => (
-  <div className={classnames([styles.container, props.className])}>
-  </div>
-);
+export default ({ foundAlbums, className, savedAlbums, onSave, onRemove }: Props) => {
+  const savedIds = R.pluck("id", savedAlbums);
+  return (
+    <div className={classnames([styles.container, className])}>
+      {
+        foundAlbums.map((el: Album) => {
+          const isSaved = savedIds.includes(el.id);
+          return (
+            <div
+              key={el.id}
+              className={classnames(styles.album, isSaved && styles.saved)}
+              onClick={() => isSaved ? onRemove(el.id) : onSave(el.id) }
+            >
+              <img src={el.cover || defaultCover} className={styles.cover} />
+              <div>
+                <p className={styles.info}>{el.title}</p>
+                <p className={styles.info}>{el.artist}</p>
+                <p className={styles.info}>{el.date.getFullYear() || ""}</p>
+                <p className={styles.info}>{el.country}</p>
+                <p className={styles.info}>Tracks: {el.trackCount}</p>
+              </div>
+            </div>
+          );
+        })
+      }
+    </div>
+  );
+};

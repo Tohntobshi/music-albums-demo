@@ -1,4 +1,4 @@
-import { RootState } from ":types";
+import { RootState, Album } from ":types";
 import { ActionCreators } from ":actions";
 
 export const changeTextToSearch = (
@@ -31,4 +31,25 @@ export const switchPending = (
 ): RootState => ({
   ...state,
   searchPending: action.state,
+});
+
+export const saveAlbum = (
+  state: RootState,
+  action: ReturnType<typeof ActionCreators.saveAlbum>,
+): RootState => {
+  const albumToSave = state.foundAlbums.find((el: Album) => el.id === action.id);
+  if (!albumToSave) { return state; }
+  if (state.savedAlbums.findIndex((el: Album) => el.id === action.id) > -1) { return state; }
+  return {
+    ...state,
+    savedAlbums: [ ...state.savedAlbums, albumToSave ],
+  };
+};
+
+export const removeAlbum = (
+  state: RootState,
+  action: ReturnType<typeof ActionCreators.saveAlbum>,
+): RootState => ({
+  ...state,
+  savedAlbums: state.savedAlbums.filter((el: Album) => el.id !== action.id),
 });

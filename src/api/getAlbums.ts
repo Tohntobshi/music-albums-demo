@@ -1,8 +1,9 @@
-import { Observable, Observer } from "rxjs";
+import { Observable, Observer, of } from "rxjs";
 import * as R from "ramda";
 import { Album } from ":types";
 
 export function getAlbums(textToSearch: string): Observable<Album[]> {
+  if (!textToSearch) { return of([]); }
   return Observable.create((observer: Observer<Album[]>) => {
     const req = new XMLHttpRequest();
     const onLoad = () => {
