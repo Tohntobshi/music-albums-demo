@@ -1,0 +1,31 @@
+@import ':sharedStyles';
+
+.container {
+  position: relative;
+}
+
+.cover {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  transition: opacity 0.2s ease-in;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;   
+}
+
+.defaultCover {
+  position: absolute;
+  top: 0;
+  left: 0;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;   
+}
+
+.loaded {
+  opacity: 1;
+}

@@ -7,14 +7,10 @@
   overflow: auto;
 }
 
-.cover {
-  width: 124px;
-  height: 124px;
-}
-
 .album {
   display: grid;
   grid-gap: 12px;
+  min-height: 124px;
   grid-template-columns: 124px 1fr;
   position: relative;
   overflow: visible;
@@ -32,6 +28,7 @@
       top: 0;
       left: 0;
       background-color: $black50;
+      z-index: 1;
     }
   }
   &:not(:last-child) {
@@ -53,6 +50,7 @@
     top: 0;
     left: 0;
     background-color: $black50;
+    z-index: 1;
   }
   &:hover {
     &:before {
@@ -67,6 +65,7 @@
       top: 0;
       left: 0;
       background-color: $black50;
+      z-index: 1;
     }
   }
 }

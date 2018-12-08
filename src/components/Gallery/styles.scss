@@ -1,0 +1,18 @@
+@import ':sharedStyles';
+
+.container {
+  position: relative;
+  width: 714px;
+  height: 320px;
+  margin: 0 auto;
+  &:hover {
+    cursor: -webkit-grab;
+  }
+}
+
+.cover {
+  position: absolute;
+  bottom: 0;
+  left: 200px;
+  transform-origin: bottom;
+}

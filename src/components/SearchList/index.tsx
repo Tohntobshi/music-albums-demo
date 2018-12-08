@@ -1,6 +1,7 @@
 import * as React from "react";
 import * as R from "ramda";
 import classnames from "classnames";
+import Cover from ":components/Cover";
 import { Album } from ":types";
 const styles = require("./styles.scss");
 const defaultCover = require(":images/default-cover.svg");
@@ -26,7 +27,7 @@ export default ({ foundAlbums, className, savedAlbums, onSave, onRemove }: Props
               className={classnames(styles.album, isSaved && styles.saved)}
               onClick={() => isSaved ? onRemove(el.id) : onSave(el.id) }
             >
-              <img src={el.cover || defaultCover} className={styles.cover} />
+              <Cover source={el.cover} size={124} />
               <div>
                 <p className={styles.info}>{el.title}</p>
                 <p className={styles.info}>{el.artist}</p>
