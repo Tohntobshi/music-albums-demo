@@ -22,4 +22,8 @@
   background-repeat: no-repeat;
   background-size: 50%;
   background-position: center;
+  &:hover {
+    background-size: 60%;
+    cursor: pointer;
+  }
 }

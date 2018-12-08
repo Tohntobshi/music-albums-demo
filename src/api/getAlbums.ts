@@ -17,7 +17,7 @@ export function getAlbums(textToSearch: string): Observable<Album[]> {
                 id: el["id"] || "",
                 title: el["title"] || "",
                 trackCount: el["track-count"] || 0,
-                date: new Date(el["date"]),
+                date: new Date(el["date"]).getTime(),
                 country: el["country"] || "",
                 cover: "",
                 artist: el["artist-credit"][0]["artist"]["name"] || "",

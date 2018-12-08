@@ -2,7 +2,7 @@ export interface Album {
   id: string;
   title: string;
   artist: string;
-  date: Date;
+  date: number;
   country: string;
   trackCount: number;
   cover: string;

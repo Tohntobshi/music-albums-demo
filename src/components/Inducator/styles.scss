@@ -1,0 +1,16 @@
+@import ':sharedStyles';
+
+.container {
+  position: relative;
+  max-width: 714px;
+  border-top: 2px solid $explosiveGray;
+  margin: 0 auto;
+}
+
+.indicator {
+  position: absolute;
+  top: 0;
+  width: 8%;
+  height: 8px;
+  background-color: $explosiveGray;
+}

@@ -31,7 +31,7 @@ export default ({ foundAlbums, className, savedAlbums, onSave, onRemove }: Props
               <div>
                 <p className={styles.info}>{el.title}</p>
                 <p className={styles.info}>{el.artist}</p>
-                <p className={styles.info}>{el.date.getFullYear() || ""}</p>
+                <p className={styles.info}>{new Date(el.date).getFullYear() || ""}</p>
                 <p className={styles.info}>{el.country}</p>
                 <p className={styles.info}>Tracks: {el.trackCount}</p>
               </div>

@@ -1,4 +1,23 @@
 @import ':sharedStyles';
 
 .container {
+  padding-top: 30px;
+}
+
+.indicator {
+  margin-top: 18px;
+}
+
+.info {
+  margin-top: 18px;
+  height: 120px;
+}
+
+.info > p{
+  text-align: center;
+  font-size: 14px;
+  font-family: 'Roboto';
+  &:not(:last-child) {
+    padding-bottom: 7px;
+  }
 }

@@ -11,7 +11,13 @@ interface Props {
 }
 
 export default (props: Props) => (
-  <div className={classnames([styles.container, props.className])}>
+  <form
+    className={classnames([styles.container, props.className])}
+    onSubmit={(e) => {
+      e.preventDefault();
+      props.onSubmit();
+    }}
+  >
     <input
       type="text"
       value={props.value}
@@ -19,8 +25,8 @@ export default (props: Props) => (
       className={styles.input}
     />
     <button
+      type="submit"
       className={styles.submitButton}
-      onClick={props.onSubmit}
-    ></button>
-  </div>
+    />
+  </form>
 );

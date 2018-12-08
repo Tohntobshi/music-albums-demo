@@ -4,15 +4,18 @@ import { createBrowserHistory } from "history";
 import Search from ":scenes/Search";
 import Saved from ":scenes/Saved";
 import NavBar from ":components/NavBar";
+import VerticalAdjuster from ":components/VerticalAdjuster";
 
 export const history = createBrowserHistory();
 
 export const Navigator = () => (
-  <Router history={history}>
-    <div>
-      <NavBar />
-      <Route path="/" exact component={Search} />
-      <Route path="/saved" exact component={Saved} />
-    </div>
-  </Router>
+  <VerticalAdjuster>
+    <Router history={history}>
+      <div>
+        <NavBar />
+        <Route path="/" exact component={Search} />
+        <Route path="/saved" exact component={Saved} />
+      </div>
+    </Router>
+  </VerticalAdjuster>
 );
