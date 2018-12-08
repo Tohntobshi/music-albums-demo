@@ -28,7 +28,6 @@ export function createAutoScrollSequence(
         }
       }
     };
-    autoScroll();
     window.requestAnimationFrame(autoScroll);
   });
 }
