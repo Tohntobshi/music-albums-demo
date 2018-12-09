@@ -8,19 +8,14 @@ import { Album } from ":types";
 import { createAutoScrollSequence } from ":utils";
 const styles = require("./styles.scss");
 
-export interface Position {
-  position: number;
-  maxPosition: number;
-}
 
 interface Props {
-  className?: string;
   savedAlbums: Album[];
   onRemove: (id: string) => void;
-  onMove: (position: Position) => void;
+  onMove: (position: number) => void;
 }
 
-export default class extends React.PureComponent<Props> {
+export default class extends React.Component<Props> {
   private dragSubscription: Subscription;
   private dragStart$ = new Subject();
   private dragMove$ = new Subject();
@@ -55,7 +50,7 @@ export default class extends React.PureComponent<Props> {
   }
 
   private scrollTo = (targetPosition: number = this.position) => {
-    const maxPosition = (this.elementRefs.length - 1) * 320;
+    const maxPosition = (this.props.savedAlbums.length - 1) * 320;
     if (targetPosition < 0) {
       this.position = 0;
     } else if (targetPosition > maxPosition) {
@@ -64,7 +59,7 @@ export default class extends React.PureComponent<Props> {
       this.position = targetPosition;
     }
     this.applyOffset();
-    this.props.onMove({ position: this.position, maxPosition });
+    this.props.onMove(this.position);
   }
 
   public componentDidMount() {
@@ -99,6 +94,14 @@ export default class extends React.PureComponent<Props> {
     this.scrollTo();
   }
 
+  public shouldComponentUpdate(nextProps: Props) {
+    return this.props.savedAlbums !== nextProps.savedAlbums;
+  }
+
+  public componentWillUpdate() {
+    this.elementRefs = [];
+  }
+
   public componentDidUpdate() {
     this.scrollTo();
   }
@@ -108,7 +111,6 @@ export default class extends React.PureComponent<Props> {
   }
 
   public render() {
-    this.elementRefs = [];
     return (
       <div
         className={styles.container}

@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { ActionCreators } from ":actions";
 import { RootState, Album } from ":types";
-import Gallery, { Position } from ":components/Gallery";
+import Gallery from ":components/Gallery";
 import Indicator from ":components/Inducator";
 import { Subject, Subscription } from "rxjs";
 import { debounceTime, throttleTime, tap } from "rxjs/operators";
@@ -14,24 +14,28 @@ interface Props {
   removeAlbum: (id: string) => void;
 }
 
-class Saved extends React.PureComponent<Props, Position> {
+interface State {
+  position: number;
+}
+
+class Saved extends React.PureComponent<Props, State> {
   private postitionSubscription: Subscription;
-  private positionUpdates$ = new Subject<Position>();
+  private positionUpdates$ = new Subject<number>();
   public state = {
     position: 0,
-    maxPosition: 0,
   };
   public componentDidMount() {
     this.postitionSubscription = this.positionUpdates$.pipe(
       // throttleTime(50),
-    ).subscribe((position) => this.setState(position));
+    ).subscribe((position) => this.setState({ position }));
   }
   public componentWillUnmount() {
     this.postitionSubscription.unsubscribe();
   }
   public render() {
-    const { position, maxPosition } = this.state;
+    const { position } = this.state;
     const { savedAlbums, removeAlbum } = this.props;
+    const maxPosition = (savedAlbums.length - 1) * 320;
     const index = Math.round((Math.max(0, (position - 160)) / maxPosition) * savedAlbums.length) || 0;
     const album = savedAlbums[index];
     return (

@@ -10,6 +10,6 @@ interface Props {
 
 export default ({ position, maxPosition, className }: Props) => (
   <div className={classnames([styles.container, className])}>
-    <div className={styles.indicator} style={{ left: `${position / maxPosition * 92}%` }}/>
+    <div className={styles.indicator} style={{ left: maxPosition > 0 ? `${position / maxPosition * 92}%` : "46%" }}/>
   </div>
 );
